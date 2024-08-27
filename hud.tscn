@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://d2jkisu2g8hnj"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_q38wa"]
+
+[sub_resource type="SystemFont" id="SystemFont_o8vga"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yp52d"]
+font = SubResource("SystemFont_o8vga")
+font_size = 70
+
+[sub_resource type="SystemFont" id="SystemFont_vu6h4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_iloa1"]
+font = SubResource("SystemFont_vu6h4")
+font_size = 70
+
+[sub_resource type="SystemFont" id="SystemFont_k8uqn"]
+
+[sub_resource type="Theme" id="Theme_8daqh"]
+default_font = SubResource("SystemFont_k8uqn")
+default_font_size = 50
+Button/fonts/font = SubResource("SystemFont_k8uqn")
+
+[sub_resource type="InputEventKey" id="InputEventKey_xy336"]
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_cknfi"]
+events = [SubResource("InputEventKey_xy336")]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_q38wa")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 96.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "0"
+label_settings = SubResource("LabelSettings_yp52d")
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 96.0
+offset_bottom = -259.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Dodge the Creeps
+"
+label_settings = SubResource("LabelSettings_iloa1")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = -88.0
+offset_right = 24.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+theme = SubResource("Theme_8daqh")
+shortcut = SubResource("Shortcut_cknfi")
+text = "Start"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
